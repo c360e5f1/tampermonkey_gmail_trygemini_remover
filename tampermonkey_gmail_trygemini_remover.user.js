@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name         GMailTryGeminiRemover
 // @namespace    http://tampermonkey.net/
-// @version      1.1
+// @version      1.2
 // @description  Removes the Gemini promo div from GMail using CSS.
 // @author       c360e5f1
 // @license      GNU GPL v3.0
