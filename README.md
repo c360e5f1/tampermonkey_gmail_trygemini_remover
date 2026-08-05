@@ -1,7 +1,7 @@
 # tampermonkey_gmail_trygemini_remover
 Removes the Gemini promo div from GMail using CSS.
 
-<img width="808" height="139" alt="image" src="https://github.com/user-attachments/assets/817f4a8b-6a35-4933-90ea-5245b2de1e3b" />
+<img width="291" height="71" alt="image" src="https://github.com/user-attachments/assets/51f20a08-13cb-46ad-aebe-5116ce624e0b" />
 
 
 If you have TamperMonkey or GreaseMonkey installed in your browser, you can click [here](https://github.com/c360e5f1/tampermonkey_gmail_trygemini_remover/raw/main/tampermonkey_gmail_trygemini_remover.user.js) to install this user script automatically.
