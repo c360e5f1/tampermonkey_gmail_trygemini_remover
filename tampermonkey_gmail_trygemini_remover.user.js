@@ -1,8 +1,8 @@
 // ==UserScript==
 // @name         GMailTryGeminiRemover
 // @namespace    http://tampermonkey.net/
-// @version      1.2
-// @description  Removes the Gemini promo div from GMail using CSS.
+// @version      2.0
+// @description  Removes the Gemini promo div from GMail.
 // @author       c360e5f1
 // @license      GNU GPL v3.0
 // @namespace    https://github.com/c360e5f1/tampermonkey_youtube_cardremover
@@ -15,20 +15,35 @@
 // @run-at       document-start
 // ==/UserScript==
 
-(function() {
+(function () {
     'use strict';
 
-    // We target the unique data attribute 'data-elevated-container-view-type="timely_bump"'
-    // This is more stable than the random-looking class names (dgq5vc e5ALpb)
-    const css = `div[data-elevated-container-view-type="timely_bump"] {
-        display: none !important;
-    }`;
+    const TARGET_CLASS = 's1rbBe';
 
-    if (typeof GM_addStyle !== 'undefined') {
-        GM_addStyle(css);
-    } else {
-        const style = document.createElement('style');
-        style.innerHTML = css;
-        document.head.appendChild(style);
+    function removeUpgradeButton() {
+        const el = document.querySelector(`.${TARGET_CLASS}`);
+        if (el) {
+            el.remove();
+            return true;
+        }
+        return false;
     }
+
+    // Try immediately in case the element already exists
+    if (removeUpgradeButton()) return;
+
+    // Otherwise, observe the DOM until it appears, then clean up
+    const observer = new MutationObserver((mutations, obs) => {
+        if (removeUpgradeButton()) {
+            obs.disconnect();
+        }
+    });
+
+    observer.observe(document.body, {
+        childList: true,
+        subtree: true
+    });
+
+    // Safety: disconnect after 30s if the element never appears (avoid leaking observers)
+    setTimeout(() => observer.disconnect(), 30000);
 })();
